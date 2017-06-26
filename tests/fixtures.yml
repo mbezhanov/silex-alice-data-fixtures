@@ -1,0 +1,6 @@
+Bezhanov\Silex\AliceDataFixtures\Tests\Entity\Foo:
+    foo{1..10}:
+        name: '<name()>'
+Bezhanov\Silex\AliceDataFixtures\Tests\Entity\Bar:
+    bar{1..5}:
+        name: '<name()>'
