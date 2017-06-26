@@ -1,6 +1,6 @@
 {
     "name": "mbezhanov/silex-alice-data-fixtures",
-    "description": "A library providing easy integration of Alice and Doctrine Data Fixtures into Silex projects",
+    "description": "A library providing simple integration of Alice and Doctrine Data Fixtures into Silex projects",
     "keywords": ["silex", "doctrine", "alice", "fixtures"],
     "type": "library",
     "license": "MIT",
@@ -19,11 +19,11 @@
     },
     "require": {
         "php": "^7.0",
-        "silex/silex": "^2.1",
-        "nelmio/alice": "^3.0@RC",
+        "dflydev/doctrine-orm-service-provider": "^2.0",
         "doctrine/data-fixtures": "^1.2",
-        "symfony/console": "^3.3",
-        "dflydev/doctrine-orm-service-provider": "^2.0"
+        "nelmio/alice": "^3.0@RC",
+        "silex/silex": "^2.1",
+        "symfony/console": "^3.3"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2"
