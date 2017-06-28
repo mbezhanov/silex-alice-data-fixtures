@@ -7,10 +7,12 @@ A library providing simple integration of [nelmio/alice](https://github.com/nelm
 Install the library through Composer:
 
 ```bash
-composer require bezhanov/silex-alice-data-fixtures
+composer require mbezhanov/silex-alice-data-fixtures
 ```
 
 ## Usage
+
+### Configuration
 
 To get up and running, register all necessary Service Providers with your Application by following the example below:
 
@@ -70,7 +72,9 @@ If you'd like to append fixtures to your existing data, instead of truncating yo
 ./bin/console fixtures:load --fixture="/path/to/fixture.yml" --append
 ```
 
-The YML files follow the standard format recognized by Alice:
+### Defining fixtures
+
+The YML files follow the [standard format](https://github.com/nelmio/alice#example) recognized by Alice:
 
 ```yml
 Bezhanov\Silex\AliceDataFixtures\Tests\Entity\Foo:
@@ -80,6 +84,30 @@ Bezhanov\Silex\AliceDataFixtures\Tests\Entity\Bar:
     bar{1..5}:
         name: '<name()>'
 ```
+
+### Using custom Faker providers
+
+Sometimes you may need more functionality than what Alice provides natively. Internally, Alice relies on [Faker](https://github.com/fzaninotto/Faker) to generate fake data.
+
+You can easily customize the [Faker Generator](https://github.com/fzaninotto/Faker#faker-internals-understanding-providers) instance that `FixturesServiceProvider` works with (e.g. to add more providers to it) by following the example below: 
+
+```php
+<?php
+
+use Bezhanov\Silex\AliceDataFixtures\FixturesServiceProvider;
+
+$app = new Silex\Application();
+
+$faker = Faker\Factory::create();
+$faker->addProvider(new Bezhanov\Faker\Provider\Food($faker));
+
+$app->register(new FixturesServiceProvider($console), [
+    'fixtures.faker_generator' => $faker,
+]);
+
+```
+
+
 
 ## Contributing
 

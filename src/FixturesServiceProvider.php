@@ -23,8 +23,10 @@ class FixturesServiceProvider implements ServiceProviderInterface
             throw new \RuntimeException('Unable to retrieve Entity Manager from Service Container.');
         }
 
-        $container['fixtures.loader'] = function() {
-            return new FixturesLoader();
+        $container['fixtures.loader'] = function(Container $container) {
+            $doctrineLoader = $container['fixtures.doctrine_loader'] ?? null;
+            $fakerGenerator = $container['fixtures.faker_generator'] ?? null;
+            return new FixturesLoader($doctrineLoader, $fakerGenerator);
         };
 
         $container['fixtures.purger'] = function() {
